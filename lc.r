@@ -1,4 +1,4 @@
-data <- read.table('t2d.txt')
+data <- read.table("/Users/Dima/Boston/Out/cd.txt")
 
 ymin <- min(data$V2, data$V4, data$V6, data$V8)
 ymax <- max(data$V2, data$V4, data$V6, data$V8)
