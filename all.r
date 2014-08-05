@@ -1,4 +1,12 @@
-make.plots 
+# generate plots for multiple phenotypes
+make.plots <- function() {
+
+  phenotypes <- c("cd", "uc", "ms", "t2d")
+  
+  for(phenotype in phenotypes) {
+    make.plot(phenotype)
+  }
+}
 
 # generate a plot for a single phenotype (e.g. "cd")
 make.plot <- function(phenotype) {
