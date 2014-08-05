@@ -42,3 +42,6 @@ make.plot <- function(phenotype) {
 
   dev.off()
 }
+
+# run make.plots function
+make.plots()
