@@ -3,6 +3,8 @@ data <- read.table("/Users/Dima/Boston/Out/cd.txt")
 ymin <- min(data$V2, data$V4, data$V6, data$V8)
 ymax <- max(data$V2, data$V4, data$V6, data$V8)
 
+pdf("cd.pdf")
+
 # yaxt: suppress y axis (to be created manually below)
 # type: line vs. dots etc.
 plot(data$V1, 
@@ -24,3 +26,5 @@ lines(data$V1, data$V8, col="purple")
 legend("bottomright", 
        c("labeled only", "500", "1000", "3000"),
        fill=c("blue", "green", "cyan", "purple"))
+
+dev.off()
