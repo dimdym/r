@@ -8,7 +8,7 @@ t2d <- read.table("/Users/Dima/Boston/Out/t2d.txt")
 ymin <- min(cd$V2, uc$V2, ms$V2, t2d$V2)
 ymax <- max(cd$V2, uc$V2, ms$V2, t2d$V2)
 
-# pdf("/Users/Dima/Boston/Out/baselines.pdf")
+pdf("/Users/Dima/Boston/Out/baselines.pdf")
 
 plot(cd$V1, 
      cd$V2,
@@ -29,4 +29,4 @@ legend("bottomright",
        c("CD", "UC", "MS", "T2D"),
        fill=c("blue", "green", "cyan", "purple"))
 
-# dev.off()
+dev.off()
