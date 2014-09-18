@@ -15,7 +15,7 @@ make.plots <- function() {
 # column2: supervised performance (0 unlabeled examples)
 # column4: performance with 500 unlabeled examples
 # column6: performance with 1000 unlabeled examples
-# column8: performance with 5000 unlabeled examples
+# column8: performance with 3000 unlabeled examples
 make.plot <- function(phenotype) {
 
   base <- "/Users/Dima/Boston/Out/"
