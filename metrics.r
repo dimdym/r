@@ -1,20 +1,20 @@
 # generate plots for multiple phenotypes
-run.metrics <- function() {
+all.phenotypes <- function() {
 
   phenotypes <- c("cd", "uc", "ms", "t2d")
-
   cat(sprintf("%3s %5s %5s %5s\n", "", "500", "1000", "3000"))
   for(phenotype in phenotypes) {
-    metric(phenotype)
+    calc.metric(phenotype)
   }
 }
 
+# calculate percent of points above baseline curve
 # column1: training set sizes
 # column2: supervised performance (0 unlabeled examples)
 # column4: performance with 500 unlabeled examples
 # column6: performance with 1000 unlabeled examples
 # column8: performance with 3000 unlabeled examples
-metric <- function(phenotype) {
+calc.metric <- function(phenotype) {
 
   base <- "/Users/Dima/Boston/Out/"
   file <- paste(base, phenotype, ".txt", sep="")
@@ -33,5 +33,5 @@ metric <- function(phenotype) {
   cat(out)
 }
 
-# run make.plots function
-run.metrics()
+# run calculations for all datasets
+all.phenotypes()
