@@ -2,11 +2,15 @@
 all.auc <- function() {
 
   phenotypes <- c("cd", "uc", "ms", "t2d")
+  cat(sprintf("%5s %6s %6s %6s\n", "", "500", "1000", "3000"))
 
-  cat(sprintf("%3s %6s %6s %6s\n", "", "500", "1000", "3000"))
+  total_auc <- 0
   for(phenotype in phenotypes) {
-    auc.improvement(phenotype)
+    phenotype_auc <- auc.improvement(phenotype)
+    total_auc <- total_auc + phenotype_auc
   }
+
+  cat(sprintf("%5s %7.3f\n", "all", total_auc))
 }
 
 # calcuate semi-supervised curve auc minus baseline auc
@@ -33,8 +37,10 @@ auc.improvement <- function(phenotype) {
   dif1000 <- auc1000 - auc0
   dif3000 <- auc3000 - auc0
   
-  out <- sprintf("%3s %6.3f %6.3f %6.3f\n", phenotype, dif500, dif1000, dif3000)
+  out <- sprintf("%5s %6.3f %6.3f %6.3f\n", phenotype, dif500, dif1000, dif3000)
   cat(out)
+
+  return(dif500 + dif1000 + dif3000)
 }
 
 # run make.plots function
