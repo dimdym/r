@@ -3,7 +3,7 @@ all.auc <- function() {
 
   phenotypes <- c("cd", "uc", "ms", "t2d")
 
-  cat(sprintf("%3s %5s %5s %5s\n", "", "500", "1000", "3000"))
+  cat(sprintf("%3s %6s %6s %6s\n", "", "500", "1000", "3000"))
   for(phenotype in phenotypes) {
     auc.improvement(phenotype)
   }
@@ -33,7 +33,7 @@ auc.improvement <- function(phenotype) {
   dif1000 <- auc1000 - auc0
   dif3000 <- auc3000 - auc0
   
-  out <- sprintf("%3s %.3f %.3f %.3f\n", phenotype, dif500, dif1000, dif3000)
+  out <- sprintf("%3s %6.3f %6.3f %6.3f\n", phenotype, dif500, dif1000, dif3000)
   cat(out)
 }
 
