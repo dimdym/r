@@ -14,24 +14,16 @@ all.auc <- function() {
 }
 
 # calcuate semi-supervised curve auc minus baseline auc
-# column1: training set sizes
-# column2: supervised performance (0 unlabeled examples)
-# column4: performance with 500 unlabeled examples
-# column6: performance with 1000 unlabeled examples
-# column8: performance with 3000 unlabeled examples
 auc.improvement <- function(phenotype) {
 
-  require(pracma, quietly=TRUE)
-  
-  base <- "/Users/Dima/Boston/Out/"
-  file <- paste(base, phenotype, ".txt", sep="")
-  out <- paste(base, phenotype, ".pdf", sep="")
-  data <- read.table(file)
+  source("common.r")
+  data <- load.results(phenotype)
 
-  auc0 <- trapz(data$V1, data$V2)
-  auc500 <- trapz(data$V1, data$V4)
-  auc1000 <- trapz(data$V1, data$V6)
-  auc3000 <- trapz(data$V1, data$V8)
+  require(pracma, quietly=TRUE)
+  auc0 <- trapz(data$size, data$u0)
+  auc500 <- trapz(data$size, data$u500)
+  auc1000 <- trapz(data$size, data$u1000)
+  auc3000 <- trapz(data$size, data$u3000)
 
   dif500 <- auc500 - auc0
   dif1000 <- auc1000 - auc0

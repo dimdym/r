@@ -8,25 +8,20 @@ make.plots <- function() {
 }
 
 # generate a plot for a single phenotype (e.g. "cd")
-# column1: training set sizes
-# column2: supervised performance (0 unlabeled examples)
-# column4: performance with 500 unlabeled examples
-# column6: performance with 1000 unlabeled examples
-# column8: performance with 3000 unlabeled examples
 make.plot <- function(phenotype) {
 
+  source("common.r")
+  data <- load.results(phenotype)
+
+  ymin <- min(data$u0, data$u500, data$u1000, data$u3000)
+  ymax <- max(data$u0, data$u500, data$u1000, data$u3000)
+
   base <- "/Users/Dima/Boston/Out/"
-  file <- paste(base, phenotype, ".txt", sep="")
   out <- paste(base, phenotype, ".pdf", sep="")
-  data <- read.table(file)
-
-  ymin <- min(data$V2, data$V4, data$V6, data$V8)
-  ymax <- max(data$V2, data$V4, data$V6, data$V8)
-
   pdf(out)
 
-  plot(data$V1, 
-       data$V2,
+  plot(data$size, 
+       data$u0,
        xlab="Training set size",
        ylab="Classification accuracy",
        ylim=c(ymin, ymax),
@@ -36,9 +31,9 @@ make.plot <- function(phenotype) {
 
   axis(2, las=2) 
 
-  lines(data$V1, data$V4, col="green")
-  lines(data$V1, data$V6, col="cyan")
-  lines(data$V1, data$V8, col="purple")
+  lines(data$size, data$u500, col="green")
+  lines(data$size, data$u1000, col="cyan")
+  lines(data$size, data$u3000, col="purple")
 
   legend("bottomright", 
          c("labeled only", "500", "1000", "3000"),
