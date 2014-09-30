@@ -16,8 +16,7 @@ make.plot <- function(phenotype) {
   ymin <- min(data$u0, data$u500, data$u1000, data$u3000)
   ymax <- max(data$u0, data$u500, data$u1000, data$u3000)
 
-  base <- "/Users/Dima/Boston/Out/"
-  out <- paste(base, phenotype, ".pdf", sep="")
+  out <- paste(BASE, phenotype, ".pdf", sep="")
   pdf(out)
 
   plot(data$size, 
