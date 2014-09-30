@@ -3,14 +3,14 @@ make.plots <- function() {
 
   phenotypes <- c("cd", "uc", "ms", "t2d")
   for(phenotype in phenotypes) {
-    make.plot(phenotype)
+    make.plot(phenotype, TRUE)
   }
 }
 
 # generate a plot for a single phenotype (e.g. "cd")
-make.plot <- function(phenotype) {
+make.plot <- function(phenotype, errorbar = TRUE) {
 
-  source("common.r")
+  source("/Users/dima/Boston/Git/r/common.r")
   data <- load.results(phenotype)
 
   ymin <- min(data$u0, data$u500, data$u1000, data$u3000)
@@ -28,6 +28,14 @@ make.plot <- function(phenotype) {
        type="l", 
        col="blue")
 
+  # draw error bars for the baseline
+  if(errorbar) {
+    width = 1
+    segments(data$size, data$u0-data$v0, data$size, data$u0+data$v0, col="blue")
+    segments(data$size-width, data$u0-data$v0, data$size+width, data$u0-data$v0)
+    segments(data$size-width, data$u0+data$v0, data$size+width, data$u0+data$v0)
+  }
+  
   axis(2, las=2) 
 
   lines(data$size, data$u500, col="green")
