@@ -1,23 +1,23 @@
 # generate plots for multiple phenotypes
-make.plots <- function() {
+make.plots <- function(directory) {
 
   source("/Users/dima/Boston/Git/r/common.r")
-  out <- paste(BASE, "all.pdf", sep="")
+  out <- paste(directory, "plots.pdf", sep="")
 
   pdf(out)
   par(mfrow=c(2,2))
 
   for(phenotype in c("cd", "uc", "ms", "t2d")) {
-    make.plot(phenotype)
+    make.plot(directory, phenotype)
   }
 
   garbage <- dev.off() # disable null device error
 }
 
 # generate a plot for a single phenotype (e.g. "cd")
-make.plot <- function(phenotype, errorbar = FALSE) {
+make.plot <- function(directory, phenotype, errorbar = FALSE) {
 
-  data <- load.results(phenotype)
+  data <- load.results(directory, phenotype)
   ymin <- min(data$u0, data$u500, data$u1000, data$u3000)
   ymax <- max(data$u0, data$u500, data$u1000, data$u3000)
 
@@ -49,5 +49,10 @@ make.plot <- function(phenotype, errorbar = FALSE) {
          fill=c("blue", "darkgreen", "gold", "purple"))
 }
 
-# run make.plots function
-make.plots()
+# "main" method here:
+
+results = "/Users/dima/Boston/SemSup/Em/Results/"
+for(file in list.files(results)) {
+  directory = paste(results, file, "/", sep="")
+  make.plots(directory)
+}

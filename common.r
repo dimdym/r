@@ -7,9 +7,9 @@ BASE <- "/Users/Dima/Boston/Out/"
 # column4: performance with 500 unlabeled examples
 # column6: performance with 1000 unlabeled examples
 # column8: performance with 3000 unlabeled examples
-load.results <- function(phenotype) {
+load.results <- function(directory, phenotype) {
 
-  file <- paste(BASE, phenotype, ".txt", sep="")
+  file <- paste(directory, phenotype, ".txt", sep="")
   data <- read.table(file)
   names <- c("size", "u0", "v0", "u500", "v500", "u1000", "v1000", "u3000", "v3000")
   colnames(data) <- names
