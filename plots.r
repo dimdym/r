@@ -23,12 +23,13 @@ make.plot <- function(phenotype, errorbar = FALSE) {
 
   plot(data$size, 
        data$u0,
-       xlab="Training set size",
-       ylab="Classification accuracy",
        ylim=c(ymin, ymax),
        yaxt="n", 
-       type="l", 
-       col="blue")
+       type="l",
+       col="blue",
+       xlab="",
+       ylab="",
+       main=toupper(phenotype))
 
   if(errorbar) {
     width = 1
@@ -39,13 +40,13 @@ make.plot <- function(phenotype, errorbar = FALSE) {
   
   axis(2, las=2) 
 
-  lines(data$size, data$u500, col="green")
-  lines(data$size, data$u1000, col="cyan")
+  lines(data$size, data$u500, col="darkgreen")
+  lines(data$size, data$u1000, col="gold")
   lines(data$size, data$u3000, col="purple")
 
   legend("bottomright", 
          c("labeled only", "500", "1000", "3000"),
-         fill=c("blue", "green", "cyan", "purple"))
+         fill=c("blue", "darkgreen", "gold", "purple"))
 }
 
 # run make.plots function
