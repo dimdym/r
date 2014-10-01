@@ -1,10 +1,8 @@
-# generate plots for multiple phenotypes
+# generate plots for the phenotypes in a directory
 make.plots <- function(directory) {
 
   source("/Users/dima/Boston/Git/r/common.r")
-  out <- paste(directory, "plots.pdf", sep="")
-
-  pdf(out)
+  pdf(paste(directory, "plots.pdf", sep=""))
   par(mfrow=c(2,2))
 
   for(phenotype in c("cd", "uc", "ms", "t2d")) {
@@ -14,10 +12,10 @@ make.plots <- function(directory) {
   garbage <- dev.off() # disable null device error
 }
 
-# generate a plot for a single phenotype (e.g. "cd")
-make.plot <- function(directory, phenotype, errorbar = FALSE) {
+# generate a plot for a phenotype stored in a directory
+make.plot <- function(directory, phenotype, errorbars = FALSE) {
 
-  data <- load.results(directory, phenotype)
+  data <- load.results(paste(directory, phenotype, ".txt", sep=""))
   ymin <- min(data$u0, data$u500, data$u1000, data$u3000)
   ymax <- max(data$u0, data$u500, data$u1000, data$u3000)
 
@@ -31,7 +29,7 @@ make.plot <- function(directory, phenotype, errorbar = FALSE) {
        ylab="",
        main=toupper(phenotype))
 
-  if(errorbar) {
+  if(errorbars) {
     width = 1
     segments(data$size, data$u0-data$v0, data$size, data$u0+data$v0, col="red")
     segments(data$size-width, data$u0-data$v0, data$size+width, data$u0-data$v0)
@@ -49,10 +47,9 @@ make.plot <- function(directory, phenotype, errorbar = FALSE) {
          fill=c("blue", "darkgreen", "gold", "purple"))
 }
 
-# "main" method here:
+# main method
+RESULTDIR = "/Users/dima/Boston/SemSup/Em/Results/"
 
-results = "/Users/dima/Boston/SemSup/Em/Results/"
-for(file in list.files(results)) {
-  directory = paste(results, file, "/", sep="")
-  make.plots(directory)
+for(directory in list.files(RESULTDIR)) {
+  make.plots(paste(RESULTDIR, directory, "/", sep=""))
 }
