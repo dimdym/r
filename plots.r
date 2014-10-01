@@ -1,23 +1,25 @@
 # generate plots for multiple phenotypes
 make.plots <- function() {
 
-  phenotypes <- c("cd", "uc", "ms", "t2d")
-  for(phenotype in phenotypes) {
+  source("/Users/dima/Boston/Git/r/common.r")
+  out <- paste(BASE, "all.pdf", sep="")
+
+  pdf(out)
+  par(mfrow=c(2,2))
+
+  for(phenotype in c("cd", "uc", "ms", "t2d")) {
     make.plot(phenotype)
   }
+
+  garbage <- dev.off() # disable null device error
 }
 
 # generate a plot for a single phenotype (e.g. "cd")
 make.plot <- function(phenotype, errorbar = FALSE) {
 
-  source("/Users/dima/Boston/Git/r/common.r")
   data <- load.results(phenotype)
-
   ymin <- min(data$u0, data$u500, data$u1000, data$u3000)
   ymax <- max(data$u0, data$u500, data$u1000, data$u3000)
-
-  out <- paste(BASE, phenotype, ".pdf", sep="")
-  pdf(out)
 
   plot(data$size, 
        data$u0,
@@ -28,7 +30,6 @@ make.plot <- function(phenotype, errorbar = FALSE) {
        type="l", 
        col="blue")
 
-  # draw error bars for the baseline
   if(errorbar) {
     width = 1
     segments(data$size, data$u0-data$v0, data$size, data$u0+data$v0, col="red")
@@ -45,8 +46,6 @@ make.plot <- function(phenotype, errorbar = FALSE) {
   legend("bottomright", 
          c("labeled only", "500", "1000", "3000"),
          fill=c("blue", "green", "cyan", "purple"))
-
-  dev.off()
 }
 
 # run make.plots function
