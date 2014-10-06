@@ -18,16 +18,23 @@ make.plot <- function(directory, phenotype, errorbars = FALSE) {
   data <- load.results(paste(directory, phenotype, ".txt", sep=""))
   ymin <- min(data$u0, data$u500, data$u1000, data$u3000)
   ymax <- max(data$u0, data$u500, data$u1000, data$u3000)
-
-  plot(data$size, 
-       data$u0,
+  xmax <- max(data$size)
+  
+  plot(0,
+       xlim=c(0, xmax),
        ylim=c(ymin, ymax),
        yaxt="n", 
-       type="l",
-       col="blue",
+       type="n",
        xlab="",
        ylab="",
        main=toupper(phenotype))
+  
+  axis(2, las=2) 
+
+  lines(data$size, data$u0, col="blue")
+  lines(data$size, data$u500, col="darkgreen")
+  lines(data$size, data$u1000, col="gold")
+  lines(data$size, data$u3000, col="purple")
 
   if(errorbars) {
     width = 1
@@ -36,12 +43,6 @@ make.plot <- function(directory, phenotype, errorbars = FALSE) {
     segments(data$size-width, data$u0+data$v0, data$size+width, data$u0+data$v0)
   }
   
-  axis(2, las=2) 
-
-  lines(data$size, data$u500, col="darkgreen")
-  lines(data$size, data$u1000, col="gold")
-  lines(data$size, data$u3000, col="purple")
-
   legend("bottomright", 
          c("labeled only", "500", "1000", "3000"),
          fill=c("blue", "darkgreen", "gold", "purple"))
