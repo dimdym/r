@@ -1,17 +1,34 @@
 # generate plots for multiple phenotypes
-all.phenotypes <- function() {
+all.phenotypes <- function(directory) {
 
-  phenotypes <- c("cd", "uc", "ms", "t2d")
-  cat(sprintf("%3s %5s %5s %5s\n", "", "500", "1000", "3000"))
-  for(phenotype in phenotypes) {
-    calc.metric(phenotype)
+  cat(sprintf("%3s %7s %7s %7s\n", "", "500", "1000", "3000"))
+  for(phenotype in c("cd", "uc", "ms", "t2d")) {
+    average.improvement(directory, phenotype)
   }
 }
 
-# calculate percent of points above baseline curve
-calc.metric <- function(phenotype) {
+# average improvement above baseline
+average.improvement <- function(directory, phenotype) {
 
-  source("common.r")
+  # look at training set sizes up to this
+  MAXSIZE = 100
+  
+  file <- paste(phenotype, ".txt", sep="")
+  data <- load.results(file.path(directory, file))
+  data.subset <- data[data$size <= MAXSIZE, ]
+  
+  diff500 <- data.subset$u500 - data.subset$u0
+  diff1000 <- data.subset$u1000 - data.subset$u0
+  diff3000 <- data.subset$u3000 - data.subset$u0
+
+  out <- sprintf("%3s %7.3f %7.3f %7.3f\n", phenotype,
+                 mean(diff500), mean(diff1000), mean(diff3000))
+  cat(out)
+}
+
+# calculate percent of points above baseline curve
+above.baseline <- function(phenotype) {
+
   data <- load.results(phenotype)
 
   dif500 <- data$u500 - data$u0
@@ -26,5 +43,10 @@ calc.metric <- function(phenotype) {
   cat(out)
 }
 
-# run calculations for all datasets
-all.phenotypes()
+# main method
+source("common.r")
+for(experiment.directory in list.files(RESULTROOT)) {
+  cat(sprintf("* lambda = %s\n\n", experiment.directory))
+  all.phenotypes(file.path(RESULTROOT, experiment.directory))
+  cat("\n")
+}
