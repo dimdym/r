@@ -1,3 +1,6 @@
+# constants
+RESULTROOT = "/Users/dima/Boston/SemSup/Em/Results/"
+
 # load experimental data for a phenotype
 # column1: training set sizes
 # column2: supervised performance (0 unlabeled examples)
