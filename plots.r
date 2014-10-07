@@ -20,14 +20,8 @@ make.plot <- function(directory, phenotype, errorbars = FALSE) {
   ymax <- max(data$u0, data$u500, data$u1000, data$u3000)
   xmax <- max(data$size)
   
-  plot(0,
-       xlim=c(0, xmax),
-       ylim=c(ymin, ymax),
-       yaxt="n", 
-       type="n",
-       xlab="",
-       ylab="",
-       main=toupper(phenotype))
+  plot(0, xlim=c(0, xmax), ylim=c(ymin, ymax), yaxt="n",
+       type="n", xlab="", ylab="", main=toupper(phenotype))
   
   axis(2, las=2) 
 
@@ -36,16 +30,16 @@ make.plot <- function(directory, phenotype, errorbars = FALSE) {
   lines(data$size, data$u1000, col="gold")
   lines(data$size, data$u3000, col="purple")
 
+  legend("bottomright", 
+         c("labeled only", "500", "1000", "3000"),
+         fill=c("blue", "darkgreen", "gold", "purple"))
+  
   if(errorbars) {
     width = 1
     segments(data$size, data$u0-data$v0, data$size, data$u0+data$v0, col="red")
     segments(data$size-width, data$u0-data$v0, data$size+width, data$u0-data$v0)
     segments(data$size-width, data$u0+data$v0, data$size+width, data$u0+data$v0)
   }
-  
-  legend("bottomright", 
-         c("labeled only", "500", "1000", "3000"),
-         fill=c("blue", "darkgreen", "gold", "purple"))
 }
 
 # main method
