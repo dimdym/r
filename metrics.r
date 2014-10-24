@@ -9,7 +9,7 @@ all.phenotypes <- function(directory) {
     total_improvement <- total_improvement + phenotype_improvement
   }
 
-  cat(sprintf("%3s %7.2f\n", "av", total_improvement / 12))
+  cat(sprintf("%3s %7.2f\n", "av", (total_improvement * 100) / 12))
 }
 
 # average improvement above baseline
@@ -27,7 +27,7 @@ average.improvement <- function(directory, phenotype) {
   diff3000 <- data.subset$u3000 - data.subset$u0
 
   out <- sprintf("%3s %7.2f %7.2f %7.2f\n", phenotype,
-                 mean(diff500), mean(diff1000), mean(diff3000))
+                 mean(diff500)*100, mean(diff1000)*100, mean(diff3000)*100)
   cat(out)
 
   return(mean(diff500) + mean(diff1000) + mean(diff3000))
