@@ -20,8 +20,9 @@ make.plot <- function(directory, phenotype, errorbars = FALSE) {
   ymax <- max(data$u0, data$u500, data$u1000, data$u3000)
   xmax <- max(data$size)
   
-  plot(0, xlim=c(0, xmax), ylim=c(ymin, ymax), yaxt="n",
-       type="n", xlab="", ylab="", main=toupper(phenotype))
+  plot(0, xlim=c(0, xmax), ylim=c(ymin, ymax), yaxt="n", type="n",
+       xlab="Number of labeled examples", ylab="Classification accuracy",
+       main=toupper(phenotype))
   
   axis(2, las=2) 
 
@@ -43,7 +44,7 @@ make.plot <- function(directory, phenotype, errorbars = FALSE) {
 }
 
 # main method
-source('common.r')
+source('/Users/Dima/Boston/Git/R/common.r')
 for(experiment_directory in list.files(RESULTROOT)) {
   make.plots(file.path(RESULTROOT, experiment_directory))
 }
