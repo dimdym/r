@@ -1,12 +1,11 @@
-# generate plots for multiple phenotypes
-all.auc <- function() {
+# generate plots for phenotypes in a directory
+all.auc <- function(directory) {
 
-  phenotypes <- c("cd", "uc", "ms", "t2d")
   cat(sprintf("%3s %7s %7s %7s\n", "", "500", "1000", "3000"))
 
   total_auc <- 0
-  for(phenotype in phenotypes) {
-    phenotype_auc <- auc.improvement(phenotype)
+  for(phenotype in c("cd", "uc", "ms", "t2d")) {
+    phenotype_auc <- auc.improvement(directory, phenotype)
     total_auc <- total_auc + phenotype_auc
   }
 
@@ -14,10 +13,10 @@ all.auc <- function() {
 }
 
 # calcuate semi-supervised curve auc minus baseline auc
-auc.improvement <- function(phenotype) {
+auc.improvement <- function(directory, phenotype) {
 
-  source("common.r")
-  data <- load.results(phenotype)
+  file <- paste(phenotype, ".txt", sep="")
+  data <- load.results(file.path(directory, file))
 
   require(pracma, quietly=TRUE)
   auc0 <- trapz(data$size, data$u0)
@@ -35,5 +34,9 @@ auc.improvement <- function(phenotype) {
   return(dif500 + dif1000 + dif3000)
 }
 
-# run make.plots function
-all.auc()
+# main method
+source('/Users/Dima/Boston/Git/R/common.r')
+for(experiment_directory in list.files(RESULTROOT)) {
+  cat(sprintf("\n* %s\n\n", experiment_directory))
+  all.auc(file.path(RESULTROOT, experiment_directory))
+}
