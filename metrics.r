@@ -11,7 +11,7 @@ all.phenotypes <- function(directory) {
 average.improvement <- function(directory, phenotype) {
 
   # look at training set sizes up to this
-  MAXSIZE = 50
+  MAXSIZE = 100
   
   file <- paste(phenotype, ".txt", sep="")
   data <- load.results(file.path(directory, file))
@@ -46,7 +46,7 @@ above.baseline <- function(phenotype) {
 # main method
 source("common.r")
 for(experiment.directory in list.files(RESULTROOT)) {
-  cat(sprintf("* lambda = %s\n\n", experiment.directory))
+  cat(sprintf("* %s\n\n", experiment.directory))
   all.phenotypes(file.path(RESULTROOT, experiment.directory))
   cat("\n")
 }
