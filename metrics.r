@@ -2,9 +2,14 @@
 all.phenotypes <- function(directory) {
 
   cat(sprintf("%3s %7s %7s %7s\n", "", "500", "1000", "3000"))
+
+  total_improvement <- 0
   for(phenotype in c("cd", "uc", "ms", "t2d")) {
-    average.improvement(directory, phenotype)
+    phenotype_improvement <- average.improvement(directory, phenotype)
+    total_improvement <- total_improvement + phenotype_improvement
   }
+
+  cat(sprintf("%3s %7.2f\n", "av", total_improvement / 12))
 }
 
 # average improvement above baseline
@@ -21,9 +26,11 @@ average.improvement <- function(directory, phenotype) {
   diff1000 <- data.subset$u1000 - data.subset$u0
   diff3000 <- data.subset$u3000 - data.subset$u0
 
-  out <- sprintf("%3s %7.3f %7.3f %7.3f\n", phenotype,
+  out <- sprintf("%3s %7.2f %7.2f %7.2f\n", phenotype,
                  mean(diff500), mean(diff1000), mean(diff3000))
   cat(out)
+
+  return(mean(diff500) + mean(diff1000) + mean(diff3000))
 }
 
 # calculate percent of points above baseline curve

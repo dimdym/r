@@ -9,7 +9,7 @@ all.auc <- function(directory) {
     total_auc <- total_auc + phenotype_auc
   }
 
-  cat(sprintf("%3s %7.3f\n", "av", total_auc / 12))
+  cat(sprintf("%3s %7.2f\n", "av", total_auc / 12))
 }
 
 # calcuate semi-supervised curve auc minus baseline auc
@@ -28,7 +28,7 @@ auc.improvement <- function(directory, phenotype) {
   dif1000 <- auc1000 - auc0
   dif3000 <- auc3000 - auc0
   
-  out <- sprintf("%3s %7.3f %7.3f %7.3f\n", phenotype, dif500, dif1000, dif3000)
+  out <- sprintf("%3s %7.2f %7.2f %7.2f\n", phenotype, dif500, dif1000, dif3000)
   cat(out)
 
   return(dif500 + dif1000 + dif3000)
