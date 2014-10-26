@@ -16,7 +16,7 @@ all.phenotypes <- function(directory) {
 average.improvement <- function(directory, phenotype) {
 
   # look at training set sizes up to this
-  MAXSIZE = 100
+  MAXSIZE = 390
   
   file <- paste(phenotype, ".txt", sep="")
   data <- load.results(file.path(directory, file))
