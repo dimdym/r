@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 # constants
 RESULTROOT = "/Users/dima/Boston/SemSup/Em/Results/"
 

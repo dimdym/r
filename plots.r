@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 # generate plots for the phenotypes in a directory
 make.plots <- function(directory) {
 

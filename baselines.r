@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 # Plot supervised baseline learning curves for all phenotypes
 
 cd <- read.table("/Users/Dima/Boston/Out/cd.txt")

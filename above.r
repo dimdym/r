@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 # generate plots for multiple phenotypes
 all.phenotypes <- function(directory) {
 

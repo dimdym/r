@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 # generate plots for phenotypes in a directory
 all.auc <- function(directory) {
 
