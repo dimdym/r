@@ -16,9 +16,6 @@ all.phenotypes <- function(directory) {
 
 # average improvement above baseline
 average.improvement <- function(directory, phenotype) {
-
-  # look at training set sizes up to this
-  MAXSIZE = 390
   
   file <- paste(phenotype, ".txt", sep="")
   data <- load.results(file.path(directory, file))
@@ -35,10 +32,14 @@ average.improvement <- function(directory, phenotype) {
   return(mean(diff500) + mean(diff1000) + mean(diff3000))
 }
 
-# main method
+# source RESULTROOT and load.results() 
 source("common.r")
-for(experiment.directory in list.files(RESULTROOT)) {
-  cat(sprintf("* %s\n\n", experiment.directory))
-  all.phenotypes(file.path(RESULTROOT, experiment.directory))
+
+# compute average improvement up to this size
+MAXSIZE = 390
+
+for(experiment_directory in list.files(RESULTROOT)) {
+  cat(sprintf("* %s\n\n", experiment_directory))
+  all.phenotypes(file.path(RESULTROOT, experiment_directory))
   cat("\n")
 }
