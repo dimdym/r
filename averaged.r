@@ -1,14 +1,5 @@
 #!/usr/bin/env Rscript
 
-# generate plots for the phenotypes in a directory
-make.plot <- function(directory) {
-
-  pdf(file.path(directory, "averaged.pdf"))
-  par(mfrow=c(1,1))
-  plot.accuracy(directory)
-  garbage <- dev.off() # disable null device error
-}
-
 # generate plot by averaging accross all phenotypes
 plot.accuracy <- function(directory) {
 
@@ -39,7 +30,13 @@ plot.accuracy <- function(directory) {
 }
 
 # main method
-source('/Users/Dima/Boston/Git/R/common.r')
+source("/Users/Dima/Boston/Git/R/common.r")
+
+pdf("/Users/Dima/Boston/Out/averaged.pdf", width=16, height=8)
+par(mfrow=c(2, 4))
+
 for(experiment_directory in list.files(RESULTROOT)) {
-  make.plot(file.path(RESULTROOT, experiment_directory))
+  plot.accuracy(file.path(RESULTROOT, experiment_directory))
 }
+
+garbage <- dev.off() # disable null device error
