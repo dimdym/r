@@ -1,12 +1,12 @@
 #!/usr/bin/env Rscript
 
 # generate plot by averaging accross all phenotypes
-plot.accuracy <- function(directory) {
+plot.accuracy <- function(folder, title) {
 
-  cd <- load.results(file.path(directory, "cd.txt"))
-  uc <- load.results(file.path(directory, "uc.txt"))
-  ms <- load.results(file.path(directory, "ms.txt"))
-  t2d <- load.results(file.path(directory, "t2d.txt"))
+  cd <- load.results(file.path(folder, "cd.txt"))
+  uc <- load.results(file.path(folder, "uc.txt"))
+  ms <- load.results(file.path(folder, "ms.txt"))
+  t2d <- load.results(file.path(folder, "t2d.txt"))
 
   baseline = (cd$u0 + uc$u0 + ms$u0 + t2d$u0) / 4
   curve500 = (cd$u500 + uc$u500 + ms$u500 + t2d$u500) / 4
@@ -18,8 +18,8 @@ plot.accuracy <- function(directory) {
   xmax <- max(cd$size)
   
   plot(0, xlim=c(0, xmax), ylim=c(ymin, ymax), yaxt="n", type="n",
-       xlab="Number of labeled examples", ylab="Classification accuracy",
-       main="Average performance")
+       xlab="Number of labeled examples", ylab="Accuracy",
+       main=title)
   
   axis(2, las=2) 
 
@@ -32,11 +32,11 @@ plot.accuracy <- function(directory) {
 # main method
 source("/Users/Dima/Boston/Git/R/common.r")
 
-pdf("/Users/Dima/Boston/Out/averaged.pdf", width=16, height=8)
-par(mfrow=c(2, 4))
+pdf("/Users/Dima/Boston/Out/averaged.pdf", width=9, height=6)
+par(mfrow=c(2, 3))
 
-for(experiment_directory in list.files(RESULTROOT)) {
-  plot.accuracy(file.path(RESULTROOT, experiment_directory))
+for(folder in c("1.00", "Heuristic", "Search", "0.05", "0.20", "0.50")) {
+  plot.accuracy(file.path(RESULTROOT, folder), folder)
 }
 
 garbage <- dev.off() # disable null device error
