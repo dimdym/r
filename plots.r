@@ -23,7 +23,7 @@ make.plot <- function(directory, phenotype, errorbars = FALSE) {
   xmax <- max(data$size)
   
   plot(0, xlim=c(0, xmax), ylim=c(ymin, ymax), yaxt="n", type="n",
-       xlab="Number of labeled examples", ylab="Classification accuracy",
+       xlab="Number of labeled examples", ylab="Accuracy",
        main=toupper(phenotype))
   
   axis(2, las=2) 
