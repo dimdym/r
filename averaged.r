@@ -19,7 +19,7 @@ plot.accuracy <- function(folder, title) {
   
   plot(0, xlim=c(0, xmax), ylim=c(ymin, ymax), yaxt="n", type="n",
        xlab="Number of labeled examples", ylab="Accuracy",
-       main=title)
+       main=substitute(paste(lambda, " = ", title), list(title=title)))
   
   axis(2, las=2) 
 
@@ -27,6 +27,10 @@ plot.accuracy <- function(folder, title) {
   lines(cd$size, curve500, col="darkgreen")
   lines(cd$size, curve1000, col="gold")
   lines(cd$size, curve3000, col="purple")
+
+  legend("bottomright", 
+         c("labeled only", "500", "1000", "3000"),
+         fill=c("blue", "darkgreen", "gold", "purple"))
 }
 
 # main method
