@@ -16,10 +16,18 @@ plot.accuracy <- function(folder, title) {
   ymin <- min(baseline, curve500, curve1000, curve3000)
   ymax <- max(baseline, curve500, curve1000, curve3000)
   xmax <- max(cd$size)
+
+  titles <- c("1.00" = " = 1.00",
+              "0.05" = " = 0.05",
+              "0.20" = " = 0.20",
+              "0.50" = " = 0.50",
+              "Heuristic" = " set by heuristic",
+              "Search" = " set by cross-validation")
+  caption = titles[[title]]
   
   plot(0, xlim=c(0, xmax), ylim=c(ymin, ymax), yaxt="n", type="n",
        xlab="Number of labeled examples", ylab="Accuracy",
-       main=substitute(paste(lambda, " = ", title), list(title=title)))
+       main=substitute(paste(lambda, caption), list(caption=caption)))
   
   axis(2, las=2) 
 
