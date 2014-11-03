@@ -3,6 +3,10 @@
 # constants
 RESULTROOT = "/Users/dima/Boston/SemSup/Em/Results/"
 
+# mapping to full phenotype names
+PHENAMES = list(cd="Crohn\'s Disease", uc="Ulcerative Colitis",
+                ms="Multiple Sclerosis", t2d="Type II Diabetes")
+
 # load experimental data for a phenotype
 # column1: training set sizes
 # column2: supervised performance (0 unlabeled examples)

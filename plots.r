@@ -24,7 +24,7 @@ make.plot <- function(directory, phenotype, errorbars = FALSE) {
   
   plot(0, xlim=c(0, xmax), ylim=c(ymin, ymax), yaxt="n", type="n",
        xlab="Number of labeled examples", ylab="Accuracy",
-       main=toupper(phenotype))
+       font.main=1, main=PHENAMES[[phenotype]])
   
   axis(2, las=2) 
 
