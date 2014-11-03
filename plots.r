@@ -28,11 +28,11 @@ make.plot <- function(directory, phenotype, errorbars = FALSE) {
   
   axis(2, las=2) 
 
-  lines(data$size, data$u0, col="blue")
   lines(data$size, data$u500, col="darkgreen")
   lines(data$size, data$u1000, col="gold")
   lines(data$size, data$u3000, col="purple")
-
+  lines(data$size, data$u0, col="blue")
+  
   legend("bottomright", 
          c("labeled only", "500", "1000", "3000"),
          fill=c("blue", "darkgreen", "gold", "purple"))
