@@ -1,15 +1,16 @@
 #!/usr/bin/env Rscript
 
 # generate plots for the phenotypes in a directory
-make.plots <- function(directory) {
+make.plots <- function(directory, title) {
 
   pdf(file.path(directory, "plots.pdf"))
-  par(mfrow=c(2,2))
+  par(mfrow=c(2,2), oma=c(3,0,0,0))
 
   for(phenotype in c("cd", "uc", "ms", "t2d")) {
     make.plot(directory, phenotype)
   }
-
+  
+  mtext(side=1, line=1, title, outer=TRUE) 
   garbage <- dev.off() # disable null device error
 }
 
@@ -48,5 +49,10 @@ make.plot <- function(directory, phenotype, errorbars = FALSE) {
 # main method
 source('/Users/Dima/Boston/Git/R/common.r')
 for(experiment_directory in list.files(RESULTROOT)) {
-  make.plots(file.path(RESULTROOT, experiment_directory))
+  title <- substitute(paste("Learning curves for ",
+                            lambda,
+                            " = ",
+                            experiment_directory),
+                      list(experiment_directory=experiment_directory))
+  make.plots(file.path(RESULTROOT, experiment_directory), title)
 }
