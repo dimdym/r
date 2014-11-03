@@ -45,10 +45,12 @@ plot.accuracy <- function(folder, title) {
 source("/Users/Dima/Boston/Git/R/common.r")
 
 pdf("/Users/Dima/Boston/Out/averaged.pdf", width=9, height=6)
-par(mfrow=c(2, 3))
+par(mfrow=c(2, 3), oma=c(3,0,0,0)) 
 
 for(folder in c("1.00", "Heuristic", "Search", "0.05", "0.20", "0.50")) {
   plot.accuracy(file.path(RESULTROOT, folder), folder)
 }
 
+# title(side=1, "Average Learning Curves", outer=TRUE)
+mtext(side=1, line=1, "Figure 1. Average Learning Curves.", outer=TRUE) 
 garbage <- dev.off() # disable null device error
