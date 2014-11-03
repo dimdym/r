@@ -31,11 +31,11 @@ plot.accuracy <- function(folder, title) {
   
   axis(2, las=2) 
 
-  lines(cd$size, baseline, col="blue")
   lines(cd$size, curve500, col="darkgreen")
   lines(cd$size, curve1000, col="gold")
   lines(cd$size, curve3000, col="purple")
-
+  lines(cd$size, baseline, col="blue")
+  
   legend("bottomright", 
          c("labeled only", "500", "1000", "3000"),
          fill=c("blue", "darkgreen", "gold", "purple"))
