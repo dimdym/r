@@ -10,7 +10,7 @@ make.plots <- function(directory, title) {
     make.plot(directory, phenotype)
   }
   
-  mtext(side=1, line=1, title, outer=TRUE) 
+  mtext(side=1, line=1, font=c(2,3), title, outer=TRUE) 
   garbage <- dev.off() # disable null device error
 }
 
