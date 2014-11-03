@@ -49,10 +49,16 @@ make.plot <- function(directory, phenotype, errorbars = FALSE) {
 # main method
 source('/Users/Dima/Boston/Git/R/common.r')
 for(experiment_directory in list.files(RESULTROOT)) {
-  title <- substitute(paste("Learning curves for ",
-                            lambda,
-                            " = ",
-                            experiment_directory),
-                      list(experiment_directory=experiment_directory))
+
+  # map directory names to lambda setting
+  lambda_values <- list("1.00" = " = 1.00",
+                        "0.05" = " = 0.05",
+                        "0.20" = " = 0.20",
+                        "0.50" = " = 0.50",
+                        "Heuristic" = " set by heuristic",
+                        "Search" = " set by cross-validation")
+  caption = lambda_values[[experiment_directory]]
+  title <- substitute(paste("Learning curves for ", lambda, caption),
+                      list(caption = caption))
   make.plots(file.path(RESULTROOT, experiment_directory), title)
 }

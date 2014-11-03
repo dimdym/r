@@ -17,12 +17,13 @@ plot.accuracy <- function(folder, title) {
   ymax <- max(baseline, curve500, curve1000, curve3000)
   xmax <- max(cd$size)
 
-  titles <- c("1.00" = " = 1.00",
-              "0.05" = " = 0.05",
-              "0.20" = " = 0.20",
-              "0.50" = " = 0.50",
-              "Heuristic" = " set by heuristic",
-              "Search" = " set by cross-validation")
+  # map directory names to caption
+  titles <- list("1.00" = " = 1.00",
+                 "0.05" = " = 0.05",
+                 "0.20" = " = 0.20",
+                 "0.50" = " = 0.50",
+                 "Heuristic" = " set by heuristic",
+                 "Search" = " set by cross-validation")
   caption = titles[[title]]
   
   plot(0, xlim=c(0, xmax), ylim=c(ymin, ymax), yaxt="n", type="n",
@@ -44,7 +45,7 @@ plot.accuracy <- function(folder, title) {
 # main method
 source("/Users/Dima/Boston/Git/R/common.r")
 
-pdf("/Users/Dima/Boston/Out/averaged.pdf", width=9, height=6)
+pdf("/Users/Dima/Boston/Git/R/figure1.pdf", width=9, height=6)
 par(mfrow=c(2, 3), oma=c(3,0,0,0)) 
 
 for(folder in c("1.00", "Heuristic", "Search", "0.05", "0.20", "0.50")) {
