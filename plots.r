@@ -29,14 +29,16 @@ make.plot <- function(directory, phenotype, errorbars = FALSE) {
   
   axis(2, las=2) 
 
-  lines(data$size, data$u500, col="darkgreen")
-  lines(data$size, data$u1000, col="gold")
-  lines(data$size, data$u3000, col="purple")
-  lines(data$size, data$u0, col="blue")
+  lines(data$size, data$u500, col="darkgreen", lty=2, lwd=1.5)
+  lines(data$size, data$u1000, col="gold", lty=4, lwd=1.5)
+  lines(data$size, data$u3000, col="purple", lty=3, lwd=1.5)
+  lines(data$size, data$u0, col="blue", lty=1, lwd=1)
   
-  legend("bottomright", 
+  legend("bottomright",
          c("labeled only", "500", "1000", "3000"),
-         fill=c("blue", "darkgreen", "gold", "purple"))
+         lty=c(1, 2, 4, 3),
+         lwd=c(1, 1.5, 1.5, 1.5),
+         col=c("blue", "darkgreen", "gold", "purple"))
   
   if(errorbars) {
     width = 1
