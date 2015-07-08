@@ -58,6 +58,6 @@ for(folder in c("1.00", "Heuristic", "Search", "0.05", "0.20", "0.50")) {
 # title(side=1, "Average Learning Curves", outer=TRUE)
 
 # subtitle (below all plots)
-mtext(side=1, line=1, font=2,
-      "Figure 1. Average Learning Curves.", outer=TRUE) 
+# mtext(side=1, line=1, font=2,
+#      "Figure 1. Average Learning Curves.", outer=TRUE) 
 garbage <- dev.off() # disable null device error
